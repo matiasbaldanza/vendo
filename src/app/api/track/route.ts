@@ -1,10 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { appendEvent, isBlockedRequest } from '@/lib/analytics'
+import { isTrackingEnabled } from '@/lib/tracking-enabled'
 import type { TrackPayload } from '@/lib/types'
 
 const VALID_TYPES = new Set(['pageview', 'whatsapp_click', 'copy_crosspost'])
 
 export async function POST(request: NextRequest) {
+  if (!isTrackingEnabled()) {
+    return NextResponse.json({ ok: true, skipped: true })
+  }
+
   const userAgent = request.headers.get('user-agent')
   const secPurpose = request.headers.get('sec-purpose')
 
