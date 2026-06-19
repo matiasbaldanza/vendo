@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import {
   SELLER_COOKIE_NAME,
+  clearSellerCookieOptions,
   isValidSellerToken,
   sellerCookieOptions,
   signSellerSession,
@@ -10,6 +11,13 @@ import {
 export async function middleware(request: NextRequest) {
   const secret = process.env.SELLER_SECRET ?? ''
   const { pathname, searchParams } = request.nextUrl
+
+  if (pathname === '/seller/logout') {
+    const response = NextResponse.redirect(new URL('/', request.url))
+    response.cookies.set(SELLER_COOKIE_NAME, '', clearSellerCookieOptions())
+    return response
+  }
+
   const isUnlockRoute = pathname === '/seller/unlock'
   const token = isUnlockRoute ? searchParams.get('token') : searchParams.get('seller')
 

@@ -76,3 +76,11 @@ export function sellerCookieOptions(maxAgeSeconds = 60 * 60 * 24 * 90) {
     maxAge: maxAgeSeconds,
   }
 }
+
+export function clearSellerCookieOptions() {
+  return {
+    ...sellerCookieOptions(0),
+    maxAge: 0,
+    expires: new Date(0),
+  }
+}

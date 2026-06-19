@@ -91,6 +91,8 @@ Unlock once per browser:
 
 Or on any page: `?seller={SELLER_SECRET}` (redirects without the token in the URL).
 
+Logout: `/seller/logout` clears the seller cookie and redirects to `/`.
+
 The token must match `SELLER_SECRET` exactly. Wrong token shows a brief message on the home page.
 
 **Session storage:** an httpOnly cookie named `vendo_seller` (not localStorage). Check it in DevTools → Application → Cookies after unlock.
