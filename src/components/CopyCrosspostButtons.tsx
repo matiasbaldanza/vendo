@@ -1,13 +1,17 @@
 'use client'
 
 import { useState } from 'react'
-import { formatPrice, productUrl } from '../../site.config'
+import { formatPrice } from '../../site.config'
 import type { Product } from '@/lib/types'
 import { track } from '@/lib/track'
 import styles from './CopyCrosspostButton.module.css'
 
-function buildCrosspostText(product: Product, platform: 'mercadolibre' | 'facebook') {
-  const url = productUrl(product.slug)
+function buildCrosspostText(
+  product: Product,
+  canonicalUrl: string,
+  platform: 'mercadolibre' | 'facebook',
+) {
+  const url = canonicalUrl
   const price = formatPrice(product.price, product.currency)
   const bullets = Object.entries(product.specs).map(([k, v]) => `• ${k}: ${v}`)
   const excerpt = product.description || product.body.split('\n')[0] || ''
@@ -31,13 +35,14 @@ function buildCrosspostText(product: Product, platform: 'mercadolibre' | 'facebo
 
 type Props = {
   product: Product
+  canonicalUrl: string
 }
 
-export default function CopyCrosspostButtons({ product }: Props) {
+export default function CopyCrosspostButtons({ product, canonicalUrl }: Props) {
   const [copied, setCopied] = useState<string | null>(null)
 
   async function copy(platform: 'mercadolibre' | 'facebook') {
-    const text = buildCrosspostText(product, platform)
+    const text = buildCrosspostText(product, canonicalUrl, platform)
     await navigator.clipboard.writeText(text)
     track({
       type: 'copy_crosspost',

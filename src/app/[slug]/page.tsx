@@ -117,7 +117,10 @@ export default async function ProductPage({ params }: Props) {
             </section>
           )}
 
-          <CopyCrosspostButtons product={product} />
+          <CopyCrosspostButtons
+            product={product}
+            canonicalUrl={productUrl(product.slug)}
+          />
         </div>
       </article>
     </>
