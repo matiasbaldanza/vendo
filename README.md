@@ -32,6 +32,7 @@ See [docs/prompts/build-v1.md](docs/prompts/build-v1.md) for the full build spec
 - Images in `public/` (no transforms)
 - Vercel deploy, Vercel KV for analytics
 - Local CLI for product management
+- CSS custom properties + CSS Modules (see [ADR 004](docs/decisions/004-styling.md))
 
 ## Continue on another machine
 

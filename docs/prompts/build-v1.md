@@ -7,7 +7,7 @@ Use this prompt to implement the app from scratch. Read the docs first.
 1. [AGENTS.md](../../AGENTS.md)
 2. [docs/project-brief.md](../project-brief.md)
 3. [docs/context-model.md](../context-model.md)
-4. [docs/decisions/](../decisions/) — ADRs 001–003
+4. [docs/decisions/](../decisions/) — ADRs 001–004
 
 Raw requirements (Spanish brain dump): [initial-pre-prompt.md](./initial-pre-prompt.md)
 
@@ -22,6 +22,7 @@ Build a TypeScript + Next.js garage-sale catalog for a moving sale. Single selle
 - **Minimize Vercel cost** — SSG product pages, one API route (`/api/track`), KV for analytics only
 - **Not** `output: 'export'` — API routes are required
 - **Spanish UI**, functional React, **no semicolons**
+- **Styling:** CSS custom properties + CSS Modules per ADR 004 — no Tailwind or UI kit
 - **Short URLs:** `/{slug}` (no `/products/` prefix)
 - **Reject bots and LLM crawlers** in analytics (server-side, before KV write)
 - **WhatsApp** contact via deep link; number from site config
@@ -35,7 +36,7 @@ Build a TypeScript + Next.js garage-sale catalog for a moving sale. Single selle
 5. Content schema per ADR 002 + one example product with placeholder images
 6. `site.config.ts` with seller settings
 7. README — problem, architecture, local dev, CLI usage, deploy, env vars, cost notes
-8. ADRs already in `docs/decisions/` — implement as specified; add ADR 004 only if you deviate
+8. ADRs already in `docs/decisions/` — implement as specified; add ADR 005 only if you deviate
 
 ## Environment variables
 

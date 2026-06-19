@@ -23,6 +23,7 @@ Instructions for AI agents working on this repo. Read this first; details live i
 - Prefer `generateStaticParams` for product pages
 - Analytics: fire-and-forget `fetch('/api/track')` — never block UI
 - Images live in `public/products/{slug}/` as uploaded — no runtime manipulation
+- Styling: CSS custom properties + CSS Modules — no Tailwind or UI kit (see ADR 004)
 - When unsure about scope, add a short ADR in `docs/decisions/` rather than expanding V1
 
 ## Task format (canonical)
