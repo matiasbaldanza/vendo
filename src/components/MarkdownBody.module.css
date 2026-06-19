@@ -1,0 +1,17 @@
+.body {
+  line-height: 1.7;
+  color: var(--color-text);
+}
+
+.body p {
+  margin: 0 0 var(--space-4);
+}
+
+.list {
+  margin: 0 0 var(--space-4);
+  padding-left: var(--space-5);
+}
+
+.list li {
+  margin-bottom: var(--space-2);
+}

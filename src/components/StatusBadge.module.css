@@ -1,0 +1,19 @@
+.badge {
+  display: inline-block;
+  padding: var(--space-1) var(--space-2);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-radius: var(--radius-sm);
+}
+
+.reserved {
+  color: var(--color-reserved);
+  background: rgb(180 83 9 / 0.1);
+}
+
+.sold {
+  color: var(--color-sold);
+  background: var(--color-sold-bg);
+}

@@ -1,0 +1,31 @@
+{
+  "name": "vendo",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@10.12.1",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "vendo": "tsx scripts/vendo.ts"
+  },
+  "dependencies": {
+    "@vercel/kv": "^3.0.0",
+    "gray-matter": "^4.0.3",
+    "isbot": "^5.1.28",
+    "next": "^15.3.3",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.21",
+    "@types/react": "^19.1.6",
+    "@types/react-dom": "^19.1.5",
+    "eslint": "^9.28.0",
+    "eslint-config-next": "^15.3.3",
+    "@eslint/eslintrc": "^3.3.1",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3"
+  }
+}

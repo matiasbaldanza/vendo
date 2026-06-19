@@ -32,7 +32,7 @@ Build a TypeScript + Next.js garage-sale catalog for a moving sale. Single selle
 1. Next.js app — buyer flows, product pages, home with filter/sort
 2. `POST /api/track` + Vercel KV storage
 3. `/stats?token=…` — aggregates (views by day, clicks, device breakdown)
-4. CLI at `scripts/vendo.ts` (invoked as `npm run vendo -- <command>`)
+4. CLI at `scripts/vendo.ts` (invoked as `pnpm vendo <command>`)
 5. Content schema per ADR 002 + one example product with placeholder images
 6. `site.config.ts` with seller settings
 7. README — problem, architecture, local dev, CLI usage, deploy, env vars, cost notes

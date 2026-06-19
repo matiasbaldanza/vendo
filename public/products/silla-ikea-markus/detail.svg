@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#d6d3d1"/>
+  <rect x="320" y="80" width="160" height="320" rx="8" fill="#57534e"/>
+  <line x1="340" y1="120" x2="460" y2="120" stroke="#a8a29e" stroke-width="2"/>
+  <line x1="340" y1="180" x2="460" y2="180" stroke="#a8a29e" stroke-width="2"/>
+  <line x1="340" y1="240" x2="460" y2="240" stroke="#a8a29e" stroke-width="2"/>
+  <text x="400" y="560" text-anchor="middle" fill="#78716c" font-family="system-ui,sans-serif" font-size="18">Detalle respaldo</text>
+</svg>

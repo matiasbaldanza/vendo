@@ -81,7 +81,7 @@ draft → published → reserved → sold
                   ↘ hidden (soft delete at any point)
 ```
 
-V1 transitions via CLI: `npm run vendo -- status silla-ikea sold`
+V1 transitions via CLI: `pnpm vendo status silla-ikea sold`
 
 ## Triage rules (for agents asked to reorder/decompose)
 
