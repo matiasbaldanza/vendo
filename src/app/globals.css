@@ -95,6 +95,14 @@ button {
   max-width: var(--max-width);
   margin: 0 auto;
   padding: var(--space-4) var(--space-5);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.siteHeaderBrand {
+  min-width: 0;
 }
 
 .siteLogo {

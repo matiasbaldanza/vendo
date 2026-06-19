@@ -4,6 +4,7 @@ export const siteConfig = {
   baseUrl: process.env.SITE_URL ?? 'http://localhost:3000',
   locale: 'es',
   statsSecret: process.env.STATS_SECRET ?? '',
+  sellerSecret: process.env.SELLER_SECRET ?? '',
 }
 
 export function formatPrice(price: number, currency: string) {

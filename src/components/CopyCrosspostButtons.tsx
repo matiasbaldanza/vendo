@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { formatPrice } from '../../site.config'
 import type { Product } from '@/lib/types'
+import { track } from '@/lib/track'
 import styles from './CopyCrosspostButton.module.css'
 
 function buildListingText(product: Product, canonicalUrl: string) {
@@ -34,6 +35,11 @@ export default function CopyCrosspostButtons({ product, canonicalUrl }: Props) {
   async function copy() {
     const text = buildListingText(product, canonicalUrl)
     await navigator.clipboard.writeText(text)
+    track({
+      type: 'copy_crosspost',
+      path: `/${product.slug}`,
+      slug: product.slug,
+    })
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }

@@ -1,6 +1,8 @@
+import { Suspense } from 'react'
 import { getAllProducts, getAllTags } from '@/lib/products'
 import ProductCatalog from '@/components/ProductCatalog'
 import PageViewTracker from '@/components/PageViewTracker'
+import SellerUnlockNotice from '@/components/SellerUnlockNotice'
 import styles from './page.module.css'
 
 export default function HomePage() {
@@ -15,6 +17,9 @@ export default function HomePage() {
         <p className={styles.subtitle}>
           Venta de garage por mudanza. Elegí un producto y contactame por WhatsApp.
         </p>
+        <Suspense fallback={null}>
+          <SellerUnlockNotice />
+        </Suspense>
       </div>
       <ProductCatalog products={products} tags={tags} />
     </>

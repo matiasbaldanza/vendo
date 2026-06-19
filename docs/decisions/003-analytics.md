@@ -10,6 +10,6 @@ Device type is derived from a lightweight UA parse on the server (mobile / deskt
 
 Set `NEXT_PUBLIC_TRACKING_DISABLED=true` (e.g. in `.env.local`) to disable tracking during local or preview testing — the client skips `fetch`, and `POST /api/track` returns without writing to KV.
 
-The seller views aggregates at `/stats?token={STATS_SECRET}` — wrong or missing token returns 404. No auth system in V1. Document this tradeoff in the README: good enough for a personal sale and portfolio demo, not for high-security analytics.
+The seller views global aggregates at `/stats?token={STATS_SECRET}` — wrong or missing token returns 404. Seller-only UI and `copy_crosspost` events use `SELLER_SECRET` + cookie (see [ADR 005](./005-seller-auth.md)). `KV_*` vars are server-only infrastructure credentials, not URL tokens.
 
 Storage: **Vercel KV** (default on Vercel deploy). Upstash is an acceptable alternative if portability matters.

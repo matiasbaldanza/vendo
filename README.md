@@ -18,6 +18,8 @@ flowchart LR
   Git -->|build| Next[Next.js SSG]
   Next --> Site[Buyer site]
   Site -->|POST /api/track| KV[Vercel KV]
+  Seller -->|/seller/unlock?token| Cookie[seller cookie]
+  Cookie --> Crosspost[copy + per-product stats]
   Seller -->|/stats?token| KV
 ```
 
@@ -37,7 +39,7 @@ flowchart LR
 
 ```bash
 pnpm install
-cp .env.example .env.local   # edit WHATSAPP_NUMBER, STATS_SECRET
+cp .env.example .env.local   # edit WHATSAPP_NUMBER, SELLER_SECRET, STATS_SECRET
 pnpm dev
 ```
 
@@ -68,15 +70,39 @@ Slugs are auto-generated from the title (lowercase, hyphenated, no accents) unle
 |----------|---------|
 | `SITE_URL` | Canonical URL for OG tags, WhatsApp pre-fill, cross-post copy |
 | `WHATSAPP_NUMBER` | E.164 without `+` (e.g. `5491112345678`) |
-| `STATS_SECRET` | Token for `/stats?token=…` |
-| `KV_*` | Vercel KV connection (analytics; required in production) |
+| `SELLER_SECRET` | Token to unlock seller mode (`/seller/unlock?token=…`) — cross-post copy and per-product stats |
+| `STATS_SECRET` | Token for the global stats dashboard (`/stats?token=…`) |
+| `KV_*` | Vercel KV credentials (server-only; not used in URLs) |
 
 ## Deploy (Vercel)
 
 1. Push to GitHub and import in Vercel
 2. Add env vars from `.env.example`
 3. Create a Vercel KV store and link it to the project
-4. Deploy — product pages are statically generated at build time
+4. Deploy — product pages are statically generated at build time; seller tools load client-side when the seller cookie is present
+
+## Seller mode
+
+Unlock once per browser:
+
+```
+/seller/unlock?token={SELLER_SECRET}
+```
+
+Or on any page: `?seller={SELLER_SECRET}` (redirects without the token in the URL).
+
+The token must match `SELLER_SECRET` exactly. Wrong token shows a brief message on the home page.
+
+**Session storage:** an httpOnly cookie named `vendo_seller` (not localStorage). Check it in DevTools → Application → Cookies after unlock.
+
+**Where to see seller tools:** open a **product page** (`/{slug}`). The home page has no seller panel. After unlock, each product page fetches `/api/seller/product-tools` and shows:
+
+- **Copy publicación** button
+- A compact **per-product stats** block (views, WhatsApp clicks, copies)
+
+**Buyer preview:** with the seller cookie, a header button toggles between *Modo vendedor* and *Ver como comprador*. The preference is stored in `localStorage` (`vendo_view_mode`); the auth cookie is unchanged.
+
+`copy_crosspost` events are accepted by `POST /api/track` only with a valid seller cookie.
 
 ## Analytics
 
@@ -89,7 +115,9 @@ Three event types: `pageview`, `whatsapp_click`, `copy_crosspost`.
 - Missing/short User-Agent
 - Prefetch requests (`Sec-Purpose: prefetch`)
 
-View aggregates at `/stats?token={STATS_SECRET}`. Wrong token → 404. Good enough for a personal sale and portfolio demo — not high-security analytics.
+`copy_crosspost` requires a valid seller session cookie (see [ADR 005](docs/decisions/005-seller-auth.md)).
+
+View global aggregates at `/stats?token={STATS_SECRET}`. Wrong token → 404. Good enough for a personal sale and portfolio demo — not high-security analytics.
 
 Retention: ~5k events or 30 days (whichever limit hits first).
 

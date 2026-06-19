@@ -5,7 +5,7 @@ import { formatPrice, productUrl, siteConfig, whatsappLink } from '../../../site
 import ImageGallery from '@/components/ImageGallery'
 import StatusBadge from '@/components/StatusBadge'
 import WhatsAppButton from '@/components/WhatsAppButton'
-import CopyCrosspostButtons from '@/components/CopyCrosspostButtons'
+import SellerProductTools from '@/components/SellerProductTools'
 import MarkdownBody from '@/components/MarkdownBody'
 import PageViewTracker from '@/components/PageViewTracker'
 import styles from './page.module.css'
@@ -117,8 +117,9 @@ export default async function ProductPage({ params }: Props) {
             </section>
           )}
 
-          <CopyCrosspostButtons
+          <SellerProductTools
             product={product}
+            slug={slug}
             canonicalUrl={productUrl(product.slug)}
           />
         </div>

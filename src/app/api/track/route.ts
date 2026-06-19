@@ -1,9 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { appendEvent, isBlockedRequest } from '@/lib/analytics'
+import { hasSellerSessionFromRequest } from '@/lib/seller-auth'
 import { isTrackingEnabled } from '@/lib/tracking-enabled'
 import type { TrackPayload } from '@/lib/types'
 
-const VALID_TYPES = new Set(['pageview', 'whatsapp_click'])
+const PUBLIC_TYPES = new Set(['pageview', 'whatsapp_click'])
+const SELLER_TYPES = new Set(['copy_crosspost'])
 
 export async function POST(request: NextRequest) {
   if (!isTrackingEnabled()) {
@@ -24,8 +26,15 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ ok: false, reason: 'invalid' }, { status: 400 })
   }
 
-  if (!VALID_TYPES.has(payload.type) || !payload.path) {
+  const isPublicType = PUBLIC_TYPES.has(payload.type)
+  const isSellerType = SELLER_TYPES.has(payload.type)
+
+  if ((!isPublicType && !isSellerType) || !payload.path) {
     return NextResponse.json({ ok: false, reason: 'invalid' }, { status: 400 })
+  }
+
+  if (isSellerType && !await hasSellerSessionFromRequest(request)) {
+    return NextResponse.json({ ok: false, reason: 'unauthorized' }, { status: 401 })
   }
 
   try {

@@ -31,7 +31,7 @@ export type Product = {
   body: string
 }
 
-export type AnalyticsEventType = 'pageview' | 'whatsapp_click'
+export type AnalyticsEventType = 'pageview' | 'whatsapp_click' | 'copy_crosspost'
 
 export type DeviceType = 'mobile' | 'desktop' | 'tablet'
 

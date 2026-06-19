@@ -107,6 +107,31 @@ export type StatsAggregates = {
   recent: AnalyticsEvent[]
 }
 
+export type SlugStats = {
+  pageviews: number
+  whatsappClicks: number
+  copyCrosspost: number
+}
+
+function eventMatchesSlug(event: AnalyticsEvent, slug: string): boolean {
+  return event.slug === slug || event.path === `/${slug}`
+}
+
+export function aggregateEventsForSlug(events: AnalyticsEvent[], slug: string): SlugStats {
+  let pageviews = 0
+  let whatsappClicks = 0
+  let copyCrosspost = 0
+
+  for (const event of events) {
+    if (!eventMatchesSlug(event, slug)) continue
+    if (event.type === 'pageview') pageviews++
+    if (event.type === 'whatsapp_click') whatsappClicks++
+    if (event.type === 'copy_crosspost') copyCrosspost++
+  }
+
+  return { pageviews, whatsappClicks, copyCrosspost }
+}
+
 export function aggregateEvents(events: AnalyticsEvent[]): StatsAggregates {
   const byDay: Record<string, number> = {}
   const byType: Record<string, number> = {}
