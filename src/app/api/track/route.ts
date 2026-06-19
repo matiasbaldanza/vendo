@@ -3,7 +3,7 @@ import { appendEvent, isBlockedRequest } from '@/lib/analytics'
 import { isTrackingEnabled } from '@/lib/tracking-enabled'
 import type { TrackPayload } from '@/lib/types'
 
-const VALID_TYPES = new Set(['pageview', 'whatsapp_click', 'copy_crosspost'])
+const VALID_TYPES = new Set(['pageview', 'whatsapp_click'])
 
 export async function POST(request: NextRequest) {
   if (!isTrackingEnabled()) {

@@ -31,7 +31,7 @@ export type Product = {
   body: string
 }
 
-export type AnalyticsEventType = 'pageview' | 'whatsapp_click' | 'copy_crosspost'
+export type AnalyticsEventType = 'pageview' | 'whatsapp_click'
 
 export type DeviceType = 'mobile' | 'desktop' | 'tablet'
 
@@ -42,12 +42,10 @@ export type AnalyticsEvent = {
   slug?: string
   device: DeviceType
   referrer?: string
-  platform?: string
 }
 
 export type TrackPayload = {
   type: AnalyticsEventType
   path: string
   slug?: string
-  platform?: string
 }

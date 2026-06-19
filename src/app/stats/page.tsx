@@ -48,17 +48,6 @@ export default async function StatsPage({ searchParams }: Props) {
         <p className={styles.bigNumber}>{stats.whatsappClicks}</p>
       </section>
 
-      {Object.keys(stats.copyCrosspost).length > 0 && (
-        <section className={styles.section}>
-          <h2 className={styles.sectionTitle}>Copias cross-post</h2>
-          <ul className={styles.statList}>
-            {Object.entries(stats.copyCrosspost).map(([platform, count]) => (
-              <li key={platform}><strong>{platform}</strong>: {count}</li>
-            ))}
-          </ul>
-        </section>
-      )}
-
       <section className={styles.section}>
         <h2 className={styles.sectionTitle}>Vistas por día</h2>
         <ul className={styles.statList}>

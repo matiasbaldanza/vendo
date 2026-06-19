@@ -48,7 +48,6 @@ export async function appendEvent(
     slug: payload.slug,
     device: parseDevice(userAgent),
     referrer: truncateReferrer(referrer),
-    platform: payload.platform,
   }
 
   await kv.lpush(EVENTS_KEY, JSON.stringify(event))
@@ -105,7 +104,6 @@ export type StatsAggregates = {
   byType: Record<string, number>
   byDevice: Record<string, number>
   whatsappClicks: number
-  copyCrosspost: Record<string, number>
   recent: AnalyticsEvent[]
 }
 
@@ -113,7 +111,6 @@ export function aggregateEvents(events: AnalyticsEvent[]): StatsAggregates {
   const byDay: Record<string, number> = {}
   const byType: Record<string, number> = {}
   const byDevice: Record<string, number> = {}
-  const copyCrosspost: Record<string, number> = {}
   let whatsappClicks = 0
 
   for (const event of events) {
@@ -123,9 +120,6 @@ export function aggregateEvents(events: AnalyticsEvent[]): StatsAggregates {
     byDevice[event.device] = (byDevice[event.device] ?? 0) + 1
 
     if (event.type === 'whatsapp_click') whatsappClicks++
-    if (event.type === 'copy_crosspost' && event.platform) {
-      copyCrosspost[event.platform] = (copyCrosspost[event.platform] ?? 0) + 1
-    }
   }
 
   return {
@@ -134,7 +128,6 @@ export function aggregateEvents(events: AnalyticsEvent[]): StatsAggregates {
     byType,
     byDevice,
     whatsappClicks,
-    copyCrosspost,
     recent: events.slice(0, 50),
   }
 }
