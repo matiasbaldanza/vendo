@@ -47,6 +47,32 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## CLI
 
+The CLI is **local to this repo** — no global install (`pnpm link --global`) needed. It writes to `content/products/` and `public/products/` relative to the **current working directory**, so run it from the repo root (or use `pnpm --dir` below).
+
+**From the repo root** (canonical):
+
+```bash
+cd /path/to/vendo
+pnpm vendo list
+```
+
+**From another directory** (no alias, no global link):
+
+```bash
+pnpm --dir /path/to/vendo vendo list
+pnpm --dir /path/to/vendo vendo add --title "..." --price 120000 --images ./photos/foo.jpg
+```
+
+`--images` paths are still relative to wherever you run the command from, not the repo.
+
+**Optional shell alias** (personal setup in `~/.zshrc`, not part of the project):
+
+```bash
+alias vendo='pnpm --dir ~/code/active/vendo vendo'
+```
+
+Commands:
+
 ```bash
 pnpm vendo list
 
