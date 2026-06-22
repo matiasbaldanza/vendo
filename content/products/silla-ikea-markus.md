@@ -24,6 +24,8 @@ specs:
 externalLinks:
   - platform: mercadolibre
     url: https://articulo.mercadolibre.com.ar/ejemplo
+  - platform: facebook
+    url: https://www.facebook.com/ejemplo
 hidden: false
 sortOrder: 1
 createdAt: "2025-06-01T10:00:00.000Z"
